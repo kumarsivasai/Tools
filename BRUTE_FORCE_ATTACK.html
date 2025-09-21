@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brute Force Attack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* General Page Styling */
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #000; /* Pure black background */
+        color: #00ff00; /* Hacker green */
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        padding: 140px;
+        font-size: 20px;
+
+        /* Center the container */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    /* Main container */
+    .container {
+        width: 90%;           /* Increased width */
+        max-width: 1100px;    /* More space */
+        background-color: #0a0a0a;
+        border: 1px solid #00ff00;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Header */
+    header {
+        display: flex;
+        justify-content: space-between; /* Title on left, button on right */
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #00ff00;
+    }
+
+    header h1 {
+        color: #00ff00;
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    /* GitHub Button */
+    .btn {
+        background-color: #00ff00;
+        color: #000;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #00cc00;
+    }
+
+    /* Sections */
+    section {
+        padding: 20px;
+        margin-top: 20px;
+        background-color: #000;
+        border: 1px solid #00ff00;
+        border-radius: 5px;
+    }
+
+    h2 {
+        color: #00ff00;
+        margin-top: 0;
+    }
+
+    /* Features List */
+    .features ul {
+        list-style-type: square;
+        margin-left: 20px;
+        padding-left: 10px;
+    }
+
+    .img {
+        display: block;
+        margin: 20px auto;
+        max-width: 100%;
+        justify-self: center;
+        justify-items: center;
+        text-align: center;
+        align-items: center;
+        height: auto;
+        border: 1px solid #00ff00;
+        border-radius: 5px;
+    }
+
+    .features li {
+        margin: 5px 0;
+        color: #00ff00;
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+        border-top: 1px solid #00ff00;
+        font-size: 14px;
+        color: #00ff00;
+    }
+
+    /* Links */
+    a {
+        color: #00ff00;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1 style="font-size: 50px;"> Brute Force Attack</h1>
+            <a href="https://github.com/kumarsivasai/BRUTE_FORCE_ATTACK_MINI_PROJECT" target="_blank" class="btn">View on GitHub</a>
+        </header>
+
+        <!-- Intro Section -->
+        <section class="intro">
+            <h2>Intro</h2>
+            <p>Brute force is a method used to crack passwords or encryption keys by systematically trying all possible combinations until the correct one is found.
+            It's one of the simplest forms of attack in cybersecurity but can be very time-consuming depending on the password's strength.
+            Credential stuffing uses leaked username-password pairs to gain access. Brute force is slowed by long, complex passwords, secure hashing, and rate-limiting systems.
+            </p>
+        </section>
+
+        <!-- Step 1 Section -->
+        <section class="intro">
+            <h2>Step 1:</h2>
+            <p>Create two Textfiles:</p>
+            <ol>
+                <li><code>password.txt</code> → Stores actual usernames and passwords.</li>
+                <li><code>wordlist.txt</code> → Stores possible password guesses.</li>
+            </ol>
+            <img src="screenshorts/1.png" alt="Feature Overview" class="img">
+        </section>
+
+        <!-- Features Section -->
+        <section class="intro">
+            <h2>Step 2:</h2>
+            <p>Create another Textfile:</p>
+            <ol>
+                <li><code>brute_force.py</code> → enter echo > brute_force.py</li>
+                <li><code>open that file</code> → nano brute_force.py and  paste the code from the GitHub </li>
+                <li><code>click on the ctrl O + enter and  ctrl X</code> → to save the file</li>
+
+            </ol>
+            <img src="screenshorts/s.png" alt="Feature Overview" class="img">
+            <img src="screenshorts/2a.png" alt="Feature Overview" class="img">
+            
+
+        </section>
+
+        <section class="intro">
+            <h2>Step 3:</h2>
+            <p>open the password.txt:</p>
+            <ol>
+                <li><code>paste 1 username-password:</code>ravi:ravi123@</li>
+                <li><code>paste 2 username-password:</code>arjunkumar:7ZGP(W7dp%X4@(Cfjw[r</li>
+                <li><code>click on the ctrl O + enter and  ctrl X</code> → to save the file</li>
+            </ol>
+            <img src="screenshorts/3.png" alt="Feature Overview" class="img">
+        </section>
+
+
+
+        <section class="intro">
+            <h2>Step 4:</h2>
+            <p>copy the wordlist.txt from the github:</p>
+            <ol>
+                <li><code>The file should like this</code></li>
+
+            </ol>
+            <img src="screenshorts/4.png" alt="Feature Overview" class="img">
+        </section>
+        
+
+        <section class="intro">
+            <h2>Step 5:</h2>
+            <p>Run the brute_force.py code:</p>
+            <ol>
+                <li><code>To run file:</code>python3 brute_force.py </li>
+                <li><code>enter the username:</code>  arjunkumar</li>
+
+
+            </ol>
+            <img src="screenshorts/5.png" alt="Feature Overview" class="img">
+        </section>
+
+
+
+
+        <section class="intro">
+            <h2>Step 6:</h2>
+            <p>See the result like this:</p>
+            <ol>
+
+
+
+            </ol>
+            <img src="screenshorts/6.png" alt="Feature Overview" class="img">
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p style="font-size: 30px;">&copy; 2025 Brute Force Attack | Built for educational and legal purposes only</p>
+        </footer>
+    </div>
+</body>
+</html>

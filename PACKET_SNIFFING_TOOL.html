@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Packet Sniffing Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+  /* General Page Styling */
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(135deg, #000000, #1a001f); /* Purple gradient background */
+    color: #00ff00; /* Neon green text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    padding: 140px;
+    font-size: 20px;
+
+    /* Center the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* Main container */
+  .container {
+    width: 90%;
+    max-width: 1100px;
+    background-color: #3d0066; /* Deep purple container */
+    border: 1px solid #00ff00;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #00ff00;
+  }
+
+  header h1 {
+    color: #00ff00;
+    margin: 0;
+    font-size: 2.5rem;
+  }
+
+  /* GitHub Button */
+  .btn {
+    background-color: #00ff00;
+    color: #2e003e; /* Dark purple text for contrast */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+  }
+
+  .btn:hover {
+    background-color: #00cc00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 1);
+  }
+
+  /* Sections */
+  section {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #1a001f; /* Darker purple for section background */
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+  }
+
+  h2 {
+    color: #00ff00;
+    margin-top: 0;
+  }
+
+  /* Features List */
+  .features ul {
+    list-style-type: square;
+    margin-left: 20px;
+    padding-left: 10px;
+  }
+
+  .img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    text-align: center;
+    height: auto;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+  }
+
+  .features li {
+    margin: 5px 0;
+    color: #00ff00;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border-top: 1px solid #00ff00;
+    font-size: 14px;
+    color: #00ff00;
+  }
+
+  /* Links */
+  a {
+    color: #00ff00;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+<body>
+  <div class="container">
+    <!-- Header Section -->
+    <header>
+      <h1>Live Packet Sniffing Tool</h1>
+      <a href="https://github.com/kumarsivasai/PACKET_SNIFFER_PROJECT" target="_blank" class="btn">View on GitHub</a>
+    </header>
+
+    <!-- Intro Section -->
+    <section class="intro">
+      <h2>Intro</h2>
+      <p>
+        A packet sniffing tool is a software application used to capture and analyze data packets traveling across a network. 
+        It provides insights into network behavior by displaying key information such as source and destination IP addresses, 
+        protocols, timestamps, and packet sizes. These tools are essential for network administrators to troubleshoot issues, 
+        monitor performance, and optimize traffic flow. In cybersecurity, packet sniffers play a vital role in detecting 
+        suspicious or malicious activities, making them crucial for maintaining network security. Popular tools like Wireshark 
+        and tcpdump are widely used, but lightweight custom sniffers can also be built using languages like Python.
+      </p>
+    </section>
+
+    <!-- Step 1 Section -->
+    <section class="intro">
+      <h2>Step 1:</h2>
+      <p>First, clone the project from GitHub.</p>
+      <p>Install all the required libraries listed in the <strong>requirements.txt</strong> file.</p>
+    </section>
+
+
+
+        <!-- Step 1 Section -->
+        <section class="intro">
+            <h2>Step 2:</h2>
+            <p>activate the python virtual env:</p>
+            <ol>
+
+            </ol>
+            <img src="packet/1.png" alt="Feature Overview" class="img">
+        </section>
+
+        <section class="intro">
+            <h2>Step 2:</h2>
+            <p>list out the files:</p>
+            <ol>
+            </ol>
+            <img src="packet/2.png" alt="Feature Overview" class="img">
+        </section>
+
+
+        <section class="intro">
+            <h2>Step 3:</h2>
+            <p>run the main.py file:</p>
+            <ol>
+                <li><code>sudo python main,py</code> → is used to run the file</li>
+            </ol>
+            <img src="packet/3.png" alt="Feature Overview" class="img">
+        </section>
+
+
+        <section class="intro">
+            <h2>Step 4:</h2>
+            <p>like this the csv file stored:</p>
+            <ol>
+                <li><code>The csv file stored in the your main folder</code></li>
+            </ol>
+            <img src="packet/4.png" alt="Feature Overview" class="img">
+        </section>
+
+        <section class="intro">
+            <h2>Step 5:</h2>
+            <p>you can see the live data capturing on browser:</p>
+            <ol>
+                <li>streamlit run dashboard.py<code>is the command used to see the live data packet capturing </code></li>
+            </ol>
+            <img src="packet/5.png" alt="Feature Overview" class="img">
+        </section>
+
+        <section class="intro">
+            <h2>Step 6:</h2>
+            <p>The actual output like this:</p>
+            <ol>
+                <li>refresh the page to see the new data packets<code></code></li>
+                <li>If any ip capture the more that 1500 packets that packet considered as the Suspicious and that shoul be in red border color<code></code></li>
+            </ol>
+            <img src="packet/6.png" alt="Feature Overview" class="img">
+        </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer>
+      <p style="font-size: 20px;">&copy; 2025 Live Packet Sniffing Tool | Built for educational and legal purposes only</p>
+    </footer>
+  </div>
+</body>
+</html>

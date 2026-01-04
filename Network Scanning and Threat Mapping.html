@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brute Force Attack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #000;
+        color: #ff3333;
+        margin: 0;
+        padding: 140px;
+        font-size: 20px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+
+        /* subtle animated background glow */
+        background-image: radial-gradient(circle at 50% 50%, #1a0000, #000);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        background-color: #0a0a0a;
+        border: 1px solid #ff3333;
+        padding: 20px;
+        border-radius: 10px;
+
+        /* neon glow */
+        box-shadow: 0 0 15px #ff3333, 0 0 40px rgba(255, 0, 0, 0.3);
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #ff3333;
+    }
+
+    header h1 {
+        color: #ff3333;
+        margin: 0;
+        font-size: 2rem;
+
+        /* glowing text */
+        text-shadow: 0 0 8px #ff3333;
+    }
+
+    .btn {
+        background-color: #ff3333;
+        color: #000;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+
+        box-shadow: 0 0 10px #ff3333;
+    }
+
+    .btn:hover {
+        background-color: #cc0000;
+        box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+        transform: scale(1.05);
+    }
+
+    section {
+        padding: 20px;
+        margin-top: 20px;
+        background-color: #000;
+        border: 1px solid #ff3333;
+        border-radius: 8px;
+
+        /* glow border */
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+
+        transition: 0.3s ease;
+    }
+
+    section:hover {
+        box-shadow: 0 0 20px #ff0000;
+        transform: translateY(-3px);
+    }
+
+    h2 {
+        color: #ff3333;
+        text-shadow: 0 0 6px #ff3333;
+    }
+
+    .img {
+        display: block;
+        margin: 20px auto;
+        max-width: 100%;
+        border: 1px solid #ff3333;
+        border-radius: 5px;
+
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        transition: 0.3s ease;
+    }
+
+    .img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px #ff0000;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+        border-top: 1px solid #ff3333;
+        font-size: 14px;
+        color: #ff3333;
+
+        text-shadow: 0 0 5px #ff3333;
+    }
+
+    a {
+        color: #ff3333;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        text-shadow: 0 0 5px #ff3333;
+    }
+
+    /* optional typing cursor effect */
+    h1::after {
+        content: "|";
+        margin-left: 5px;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1 style="font-size: 50px;">Network Scanning and Threat Mapping using Nmap and Wireshark</h1>
+            <a href="https://github.com/kumarsivasai/Tools" target="_blank" class="btn">View on GitHub</a>
+        </header>
+
+        <!-- Intro Section -->
+<section class="intro">
+    <h2>Introduction</h2>
+    <p>
+        The primary objective of this project is to understand and simulate the reconnaissance phase of ethical hacking by performing controlled network scanning and traffic analysis in a lab environment.
+    </p>
+
+    <p>This project aims to:</p>
+    
+    <ul>
+        <li>Perform port scanning and service enumeration using Nmap.</li>
+        <li>Identify open ports and running services on a target system.</li>
+        <li>Analyze network traffic generated during scanning using Wireshark.</li>
+        <li>Observe and interpret TCP handshake behavior (SYN, SYN-ACK, RST).</li>
+        <li>Map identified services to potential vulnerabilities and attack vectors.</li>
+        <li>Understand how attackers gather information before launching an attack.</li>
+        <li>Document findings in a structured penetration testing report format.</li>
+    </ul>
+</section>
+
+
+
+<!-- Step 1 Section -->
+<section class="intro">
+    <h2>Step 1: Lab Setup (Very Important)</h2>
+
+    <p>
+        To begin the lab, you need to install and configure two virtual machines in VMware or VirtualBox:
+    </p>
+
+    <ul>
+        <li><strong>Windows VM</strong> – Attacker machine</li>
+        <li><strong>Kali Linux VM</strong> – Target/Victim machine</li>
+    </ul>
+
+    <p><strong>Network Configuration:</strong></p>
+    <p>
+        In your virtualization software, go to:
+    </p>
+    <p><em>VM → Settings → Network</em></p>
+
+    <p>Select one of the following network modes:</p>
+    <ul>
+        <li><strong>NAT Mode</strong> (Recommended)</li>
+        <li><strong>Host-Only Mode</strong> (More isolated lab environment)</li>
+    </ul>
+
+    <p>
+        Ensure that both virtual machines are connected to the <strong>same network</strong> so they can communicate with each other.
+    </p>
+
+    <div class="image-container">
+        <img src="network/1.png" alt="VM Network Settings" class="img">
+        <img src="network/2.png" alt="VM Network Configuration Example" class="img">
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- Step 2 Section -->
+<section class="intro">
+    <h2>Step 2: Start the Virtual Machines</h2>
+
+    <p>
+        Start both the <strong>Kali Linux</strong> machine and the <strong>Windows</strong> machine by clicking the <strong>Start</strong> button in your virtualization software.
+    </p>
+
+    <div class="image-container">
+        <img src="network/3.png" alt="Starting Virtual Machine" class="img">
+        <img src="network/4.png" alt="VM Startup Screen" class="img">
+    </div>
+</section>
+
+
+
+        <!-- Features Section -->
+<section class="intro">
+    <h2>Step 3: Find IP Addresses of Both Machines</h2>
+
+    <p>
+        In this step, identify the IP addresses of both the <strong>Kali Linux</strong> machine and the <strong>Windows</strong> machine. Ensure both are in the same network.
+    </p>
+
+    <ol>
+        <li>
+            <strong>On Kali Linux:</strong>
+            <p>Open the terminal and run the following command:</p>
+            <pre>ifconfig</pre>
+            <p>Look for an entry like:</p>
+            <pre>inet 192.168.143.137/24</pre>
+            <p><strong>Kali IP Address:</strong> 192.168.143.137</p>
+        </li>
+
+        <li>
+            <strong>On Windows:</strong>
+            <p>Open Command Prompt and run:</p>
+            <pre>ipconfig</pre>
+            <p>Look for:</p>
+            <pre>IPv4 Address . . . . . . . . . . : 192.168.191.60</pre>
+        </li>
+    </ol>
+
+    <p>
+        Make sure both IP addresses belong to the same network range (e.g., 192.168.x.x).
+    </p>
+
+    <div class="image-container">
+        <img src="network/5.png" alt="Kali IP Address Output" class="img">
+        <img src="network/6.png" alt="Windows IP Address Output" class="img">
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+ <section class="intro">
+    <h2>Step 4: Prepare Kali as Victim (Enable Services)</h2>
+
+    <p>
+        To perform scanning, we need open ports on the target system. In this step, we will start essential services on the Kali Linux machine.
+    </p>
+
+    <ol>
+        <li>
+            <strong>Start SSH Service</strong>
+            <p>Run the following commands:</p>
+            <pre>
+sudo service ssh start
+sudo service ssh status
+            </pre>
+            <p><strong>Default Port:</strong> 22</p>
+            <img src="network/7.png" alt="SSH Service Status" class="img">
+        </li>
+
+        <li>
+            <strong>Start Apache Web Server</strong>
+            <p>Run the following command:</p>
+            <pre>sudo service apache2 start</pre>
+            <p><strong>Default Port:</strong> 80</p>
+            <p>Test in browser:</p>
+            <pre>http://&lt;Kali-IP&gt;</pre>
+            <img src="network/8.png" alt="Apache Service Running" class="img">
+        </li>
+
+        <li>
+            <strong>Start FTP Service</strong>
+            <p>Run the following commands:</p>
+            <pre>
+sudo service vsftpd start
+sudo service vsftpd status
+            </pre>
+
+            <p>If the command does not work, run:</p>
+            <pre>sudo apt update && sudo apt upgrade</pre>
+
+            <p><strong>Default Port:</strong> 21</p>
+            <img src="network/ftp.png" alt="FTP Service Status" class="img">
+        </li>
+    </ol>
+
+    <p>
+        After completing the above steps, the Kali machine will have the following active services:
+    </p>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Port</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SSH</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>HTTP</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>FTP</td>
+                <td>21</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        These three services are now running and ready for scanning as per the project requirements.
+    </p>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="intro">
+    <h2>Step 5: Install Nmap on Windows (Attacker)</h2>
+
+    <p>
+        In this step, install Nmap on the Windows machine, which will act as the attacker system.
+    </p>
+
+    <ol>
+        <li>
+            <strong>Download Nmap:</strong>
+            <p>Visit the official website:</p>
+            <pre>https://nmap.org</pre>
+        </li>
+
+        <li>
+            <strong>Install Nmap:</strong>
+            <p>Run the installer and follow the default installation steps.</p>
+        </li>
+
+        <li>
+            <strong>Verify Installation:</strong>
+            <p>Open Command Prompt and run:</p>
+            <pre>nmap --version</pre>
+            <p>
+                If the version details are displayed, Nmap has been installed successfully.
+            </p>
+        </li>
+    </ol>
+
+    <div class="image-container">
+        <img src="network/9.png" alt="Nmap Installation on Windows" class="img">
+    </div>
+</section>
+        
+
+
+
+
+
+
+
+
+
+
+<section class="intro">
+    <h2>Step 6: Start Wireshark on Kali (Victim Side)</h2>
+
+    <p>
+        In this step, Wireshark is used on the Kali Linux machine to capture and analyze network traffic generated during scanning.
+    </p>
+
+    <ol>
+        <li>
+            <strong>Open Wireshark:</strong>
+            <pre>sudo wireshark</pre>
+        </li>
+
+        <li>
+            <strong>Select Network Interface:</strong>
+            <p>Choose the active network interface, usually:</p>
+            <pre>eth0</pre>
+        </li>
+
+        <li>
+            <strong>Start Capturing:</strong>
+            <p>Click on <strong>Start Capturing</strong> to begin monitoring network traffic.</p>
+        </li>
+    </ol>
+
+    <p>
+        Wireshark will now capture incoming scan traffic from the attacker machine.
+    </p>
+
+    <div class="image-container">
+        <img src="network/10.png" alt="Wireshark Capture on Kali Linux" class="img">
+    </div>
+        <div class="image-container">
+        <img src="network/11.png" alt="Wireshark Capture on Kali Linux" class="img">
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Step 7 -->
+<section class="intro">
+    <h2>Step 7: Perform Nmap Scan from Windows</h2>
+
+    <p>
+        Open Command Prompt on the Windows (attacker) machine and run the following Nmap commands to scan the target (Kali machine).
+    </p>
+
+    <ol>
+        <li>
+            <strong>Basic Scan:</strong>
+            <pre>nmap 192.168.143.137</pre>
+            <img src="network/12.png" alt="Basic Nmap Scan Result" class="img">
+        </li>
+
+        <li>
+            <strong>Service Version Detection:</strong>
+            <pre>nmap -sV 192.168.143.137</pre>
+            <img src="network/13.png" alt="Nmap Service Version Detection Result" class="img">
+        </li>
+
+        <li>
+            <strong>OS Detection:</strong>
+            <pre>nmap -O 192.168.143.137</pre>
+            <img src="network/14.png" alt="Nmap OS Detection Result" class="img">
+        </li>
+
+        <li>
+            <strong>Aggressive Scan (Project Requirement):</strong>
+            <pre>nmap -A 192.168.143.137</pre>
+            <img src="network/15.png" alt="Nmap Aggressive Scan Result" class="img">
+        </li>
+    </ol>
+</section>
+
+
+
+
+<!-- Step 8 -->
+<section class="intro">
+    <h2>Step 8: Analyze Traffic in Wireshark</h2>
+
+    <p>
+        Go back to the Kali machine where Wireshark is running. You will observe different types of packets generated during the scan:
+    </p>
+
+    <ul>
+        <li>SYN packets</li>
+        <li>TCP handshake (SYN, SYN-ACK, ACK)</li>
+        <li>Service detection packets</li>
+        <li>RST packets (reset)</li>
+        <li>PSH packets (push)</li>
+    </ul>
+
+    <p><strong>Useful Filters:</strong></p>
+
+    <p>Show only SYN packets:</p>
+    <pre>tcp.flags.syn == 1 && tcp.flags.ack == 0</pre>
+
+    <p>Other filters:</p>
+    <pre>
+tcp.flags.ack == 0
+tcp.flags.syn == 1
+    </pre>
+
+    <p>Filter by Windows (attacker) IP:</p>
+    <pre>ip.addr == &lt;Windows-IP&gt;</pre>
+
+    <div class="image-container">
+        <img src="network/19.png" alt="Wireshark Packet Analysis" class="img">
+        <img src="network/18.png" alt="Wireshark Filters Applied" class="img">
+    </div>
+</section>
+
+<!-- Step 9 -->
+<section class="intro">
+    <h2>Step 9: Identify Services and Map Threats</h2>
+
+    <p>
+        Based on the Nmap scan results, identify open ports and running services, then map them to potential security threats.
+    </p>
+
+    <p><strong>Example Output:</strong></p>
+    <pre>
+22/tcp open  ssh     OpenSSH 9.2
+80/tcp open  http    Apache 2.4.57
+21/tcp open  ftp     vsftpd 3.0.3
+    </pre>
+
+    <p><strong>Threat Mapping:</strong></p>
+
+    <ul>
+        <li>
+            <strong>SSH (Port 22)</strong>
+            <ul>
+                <li>Service: OpenSSH</li>
+                <li>Possible Threats:
+                    <ul>
+                        <li>Brute-force attacks</li>
+                        <li>Credential stuffing</li>
+                        <li>Weak passwords</li>
+                    </ul>
+                </li>
+                <li>Common Tools:
+                    <ul>
+                        <li>Hydra</li>
+                        <li>Medusa</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>HTTP (Port 80)</strong>
+            <ul>
+                <li>Service: Apache</li>
+                <li>Possible Threats:
+                    <ul>
+                        <li>Directory traversal</li>
+                        <li>Cross-Site Scripting (XSS)</li>
+                        <li>SQL Injection (if a web application exists)</li>
+                    </ul>
+                </li>
+                <li>Common Tools:
+                    <ul>
+                        <li>Gobuster</li>
+                        <li>Nikto</li>
+                        <li>Burp Suite</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <strong>FTP (Port 21)</strong>
+            <ul>
+                <li>Service: vsftpd</li>
+                <li>Possible Threats:
+                    <ul>
+                        <li>Anonymous login access</li>
+                        <li>Credential brute-force attacks</li>
+                        <li>Outdated vsftpd backdoor vulnerabilities</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Summary Table:</strong></p>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Port</th>
+                <th>Service</th>
+                <th>Possible Threat</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>21</td>
+                <td>FTP</td>
+                <td>Anonymous Login</td>
+                <td>Attackers may access files without authentication</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>SSH</td>
+                <td>Brute Force Attack</td>
+                <td>Attackers may attempt password guessing</td>
+            </tr>
+            <tr>
+                <td>80</td>
+                <td>HTTP</td>
+                <td>Web Vulnerabilities</td>
+                <td>May be vulnerable to XSS, SQL Injection, etc.</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+        <!-- Footer -->
+        <footer>
+            <p style="font-size: 30px;">&copy; 2025 Brute Force Attack | Built for educational and legal purposes only</p>
+        </footer>
+    </div>
+</body>
+</html>
